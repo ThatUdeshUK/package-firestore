@@ -1,3 +1,4 @@
-# Hello World
+Connects to Firestore from Ballerina. 
 
-Prints "hello world" to command line output
+# Package Overview
+The Firestore connector allows you to create, delete and retrive document firestore through the Firebase REST API.
