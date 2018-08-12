@@ -21,6 +21,13 @@ public type FirestoreDocumentRef object {
     public function get() returns json|FirestoreError;
 
     documentation {
+        Delete the document.
+
+        R{{}} If success, returns null json, else returns `FirestoreError` object
+    }
+    public function delete() returns json|FirestoreError;
+
+    documentation {
         Returns specified collection's reference of the document.
 
         P{{collection}} Collection in the document 
@@ -33,6 +40,13 @@ public type FirestoreDocumentRef object {
 function FirestoreDocumentRef::get() returns json|FirestoreError {
     endpoint http:Client httpClient = self.client;
     var resp = httpClient->get(FIRESTORE_DOCUMENTS + self.path + "?key=" + self.apiKey);
+    var jsonResponse = check parseResponseToJson(resp);
+    return jsonResponse; 
+}
+
+function FirestoreDocumentRef::delete() returns json|FirestoreError {
+    endpoint http:Client httpClient = self.client;
+    var resp = httpClient->delete(FIRESTORE_DOCUMENTS + self.path + "?key=" + self.apiKey, ());
     var jsonResponse = check parseResponseToJson(resp);
     return jsonResponse; 
 }
