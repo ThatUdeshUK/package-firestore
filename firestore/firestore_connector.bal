@@ -13,9 +13,9 @@ public type FirestoreConnector object {
         Returns snapshot of the document of the specified path.
         
         P{{path}} Path to the document
-        R{{}} If success, returns json with document snapshot, else returns `FirestoreError` object
+        R{{}} If success, returns Document with document snapshot, else returns `FirestoreError` object
     }
-    public function get(string path) returns json|FirestoreError;
+    public function get(string path) returns Document|FirestoreError;
 
     documentation {
         Returns reference the default database
@@ -26,11 +26,11 @@ public type FirestoreConnector object {
 
 };
 
-function FirestoreConnector::get(string path) returns json|FirestoreError {
+function FirestoreConnector::get(string path) returns Document|FirestoreError {
     endpoint http:Client httpClient = self.client;
     var resp = httpClient->get(FIRESTORE_DOCUMENTS + path + "?key=" + self.apiKey);
-    var jsonResponse = check parseResponseToJson(resp);
-    return jsonResponse; 
+    var doc = check parseResponseToDocument(resp);
+    return doc; 
 }
 
 function FirestoreConnector::ref() returns FirestoreRef {

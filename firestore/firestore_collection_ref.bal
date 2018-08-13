@@ -17,9 +17,9 @@ public type FirestoreCollectionRef object {
         Create a document in the collection and returns it.
 
         P{{fields}} Document in the collection
-        R{{}} If success, returns json with document snapshot, else returns `FirestoreError` object
+        R{{}} If success, returns Document with document snapshot, else returns `FirestoreError` object
     }
-    public function createDocument(json fields) returns json|FirestoreError;
+    public function createDocument(json fields) returns Document|FirestoreError;
 
     documentation {
         Returns specified document's reference of the collection.
@@ -36,10 +36,10 @@ function FirestoreCollectionRef::document(string document) returns FirestoreDocu
     return documentRef; 
 }
 
-function FirestoreCollectionRef::createDocument(json fields) returns json|FirestoreError {
+function FirestoreCollectionRef::createDocument(json fields) returns Document|FirestoreError {
     endpoint http:Client httpClient = self.client;
     json document = { fields: fields };
     var resp = httpClient->post(FIRESTORE_DOCUMENTS + self.path + "?key=" + self.apiKey, document);
-    var jsonResponse = check parseResponseToJson(resp);
-    return jsonResponse; 
+    var doc = check parseResponseToDocument(resp);
+    return doc; 
 }
