@@ -1,6 +1,7 @@
 [project]
 org-name = "udeshuk"
-version = "0.0.2"
-authors = ["WSO2"]
-repository = "https://github.com/wso2-ballerina/package-twitter"
-keywords = ["ballerina", "Twitter", "endpoint", "connector"]
+version = "0.0.3"
+authors = ["UdeshUK"]
+license = "Apache-2.0"
+repository = "https://github.com/UdeshUK/package-firestore"
+keywords = ["ballerina", "Firestore", "endpoint", "connector"]
